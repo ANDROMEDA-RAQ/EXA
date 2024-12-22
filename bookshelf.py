@@ -4,43 +4,62 @@ from PIL import Image, ImageTk
 import sqlite3
 
 # Create or connect to the database
-conn = sqlite3.connect('book_database.db')
+conn = sqlite3.connect("book_database.db")
 c = conn.cursor()
 
+# SQL command to create the table
+create_table_sql = """
+CREATE TABLE IF NOT EXISTS books (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    author TEXT NOT NULL,
+    cover_path TEXT
+);
+"""
+
 # Create table if it doesn't exist
-c.execute('''CREATE TABLE IF NOT EXISTS books 
-             (id INTEGER PRIMARY KEY, 
-             title TEXT, 
-             author TEXT, 
-             cover_path TEXT)''')
+c.execute(create_table_sql)
 conn.commit()
 
 # Sample data insertion - excluding the books you want to delete
 books = [
-    ("The Information Superhighway Beyond the Internet", "Otte,Peter", r"C:\Users\JANREY\OneDrive\Desktop\the information superhighway beyond the internet.png"),
-    ("Using Microsoft Office", "QUE Corporation", r"C:\Users\JANREY\OneDrive\Desktop\Using Microsoft office.png"),
-    ("Word Processing Applications and Living Online", "Rex Books", r"C:\Users\JANREY\OneDrive\Desktop\Word processing.png")
+    (
+        "The Information Superhighway Beyond the Internet",
+        "Otte,Peter",
+        r"Images\the information superhighway beyond the internet.png",
+    ),
+    (
+        "Using Microsoft Office",
+        "QUE Corporation",
+        r"Images\Word processing.png",
+    ),
+    (
+        "Word Processing Applications and Living Online",
+        "Rex Books",
+        r"Images\Word processing.png",
+    ),
 ]
 
 for book in books:
     c.execute("INSERT INTO books (title, author, cover_path) VALUES (?, ?, ?)", book)
 conn.commit()
 
+
 class BookDatabaseApp:
     def __init__(self, master):
         self.master = master
         self.master.title("Book Database")
-        
+
         # Create a canvas with a scrollbar
         self.canvas = tk.Canvas(master)
-        self.scrollbar = ttk.Scrollbar(master, orient="vertical", command=self.canvas.yview)
+        self.scrollbar = ttk.Scrollbar(
+            master, orient="vertical", command=self.canvas.yview
+        )
         self.scrollable_frame = ttk.Frame(self.canvas)
 
         self.scrollable_frame.bind(
             "<Configure>",
-            lambda e: self.canvas.configure(
-                scrollregion=self.canvas.bbox("all")
-            )
+            lambda e: self.canvas.configure(scrollregion=self.canvas.bbox("all")),
         )
 
         self.canvas.create_window((0, 0), window=self.scrollable_frame, anchor="nw")
@@ -79,12 +98,13 @@ class BookDatabaseApp:
         # Display book info
         info_frame = ttk.Frame(book_frame)
         info_frame.pack(side="left", padx=10)
-        
+
         title_label = ttk.Label(info_frame, text=title, font=("Helvetica", 12, "bold"))
         title_label.pack(anchor="w")
-        
+
         author_label = ttk.Label(info_frame, text=f"by {author}")
         author_label.pack(anchor="w")
+
 
 if __name__ == "__main__":
     root = tk.Tk()
