@@ -32,7 +32,7 @@ root.geometry("500x600")
 # Load background image
 try:
     background_image = Image.open(
-        r"C:\Users\JANREY\OneDrive\Desktop\download.png"
+        r"Images\download.png"
     )  # Change this path to your landscape image
     background_image = background_image.resize(
         (1600, 1600), Image.LANCZOS
@@ -62,9 +62,7 @@ canvas.pack(pady=20)
 
 # Load and display image
 try:
-    logo_image = Image.open(
-        r"C:\Users\JANREY\OneDrive\Desktop\pngkey.com-phillies-logo-png-528919.png"
-    ).resize(
+    logo_image = Image.open(r"Images\pngkey.com-phillies-logo-png-528919.png").resize(
         (100, 100)
     )  # Resize for consistency
     logo = ImageTk.PhotoImage(logo_image)
