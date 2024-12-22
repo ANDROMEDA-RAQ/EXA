@@ -22,7 +22,7 @@ header.pack(fill="x")
 # Load and resize logo image
 try:
     logo_image = Image.open(
-        r"C:\Users\JANREY\OneDrive\Desktop\pngkey.com-phillies-logo-png-528919.png"
+        r"Images\pngkey.com-phillies-logo-png-528919.png"
     )  # Replace with your logo image path
     logo_image = logo_image.resize((90, 90), Image.LANCZOS)
     logo_photo = ImageTk.PhotoImage(logo_image)
@@ -64,17 +64,17 @@ button_frame.pack(fill="x")
 
 # Load icon images
 try:
-    home_icon = Image.open(r"C:\Users\JANREY\OneDrive\Desktop\home.png")
+    home_icon = Image.open(r"Images\home.png")
     home_icon = home_icon.resize((30, 30), Image.LANCZOS)  # Adjust size as needed
     home_icon_photo = ImageTk.PhotoImage(home_icon)
 
-    my_books_icon = Image.open(r"C:\Users\JANREY\OneDrive\Desktop\my books.jpg")
+    my_books_icon = Image.open(r"Images\my books.png")
     my_books_icon = my_books_icon.resize(
         (30, 30), Image.LANCZOS
     )  # Adjust size as needed
     my_books_icon_photo = ImageTk.PhotoImage(my_books_icon)
 
-    readerboards_icon = Image.open(r"C:\Users\JANREY\OneDrive\Desktop\readerboards.jpg")
+    readerboards_icon = Image.open(r"Images\readerboards.png")
     readerboards_icon = readerboards_icon.resize(
         (30, 30), Image.LANCZOS
     )  # Adjust size as needed
@@ -122,7 +122,7 @@ except FileNotFoundError:
 # Load background image
 try:
     background_image = Image.open(
-        r"C:\Users\JANREY\OneDrive\Desktop\output-onlinepngtools.png"
+        r"Images\output-onlinepngtools.png"
     )  # Replace with your background image path
     background_image = background_image.resize(
         (800, 450), Image.LANCZOS
