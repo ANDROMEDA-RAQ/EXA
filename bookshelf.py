@@ -41,7 +41,18 @@ books = [
 ]
 
 for book in books:
-    c.execute("INSERT INTO books (title, author, cover_path) VALUES (?, ?, ?)", book)
+    # Check if the book already exists before inserting
+    c.execute(
+        "SELECT id FROM books WHERE title = ? AND author = ? AND cover_path = ?", book
+    )
+    existing_book = c.fetchone()
+
+    if not existing_book:
+        # Insert the book only if it does not already exist in the database
+        c.execute(
+            "INSERT INTO books (title, author, cover_path) VALUES (?, ?, ?)", book
+        )
+
 conn.commit()
 
 
@@ -67,6 +78,9 @@ class BookDatabaseApp:
 
         self.canvas.pack(side="left", fill="both", expand=True)
         self.scrollbar.pack(side="right", fill="y")
+
+        # Bind mouse wheel to canvas for scrolling
+        self.canvas.bind_all("<MouseWheel>", self._on_mousewheel)
 
         # Fetch and display books
         self.display_books()
@@ -104,6 +118,17 @@ class BookDatabaseApp:
 
         author_label = ttk.Label(info_frame, text=f"by {author}")
         author_label.pack(anchor="w")
+
+    def _on_mousewheel(self, event):
+        # Windows and Linux use different event attributes for mouse wheel delta
+        if event.delta:
+            self.canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
+        else:
+            # For Mac OS, event.num gives the direction of scroll
+            if event.num == 4:
+                self.canvas.yview_scroll(-1, "units")
+            elif event.num == 5:
+                self.canvas.yview_scroll(1, "units")
 
 
 if __name__ == "__main__":
