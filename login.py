@@ -62,7 +62,7 @@ canvas.pack(pady=20)
 
 # Load and display image
 try:
-    logo_image = Image.open(r"Images\pngkey.com-phillies-logo-png-528919.png").resize(
+    logo_image = Image.open(r"Images\puplogo.png").resize(
         (100, 100)
     )  # Resize for consistency
     logo = ImageTk.PhotoImage(logo_image)

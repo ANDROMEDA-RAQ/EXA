@@ -1,4 +1,5 @@
 import tkinter as tk
+from PIL import Image, ImageTk
 
 root = tk.Tk()
 root.geometry("500x400")
@@ -81,6 +82,20 @@ options_frame.pack_propagate(False)
 options_frame.configure(width=200, height=400)
 
 main_frame = tk.Frame(root, highlightbackground="black", highlightthickness=2)
+
+# Add a JPG photo on main_frame with adjustable size
+original_image = Image.open(
+    "Images\download.png"
+)  # Replace with your actual image path
+# Adjust the size here:
+resized_image = original_image.resize(
+    (1400, 950), Image.LANCZOS
+)  # Adjust width and height as needed
+main_frame_photo = ImageTk.PhotoImage(resized_image)
+
+main_frame_photo_label = tk.Label(main_frame, image=main_frame_photo)
+main_frame_photo_label.image = main_frame_photo  # Keep a reference!
+main_frame_photo_label.pack(pady=0)  # Adjust padding as needed
 
 main_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
 main_frame.pack_propagate(False)

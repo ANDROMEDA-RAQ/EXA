@@ -1,148 +1,117 @@
 import tkinter as tk
 from PIL import Image, ImageTk
 
-# Custom Styles
-style = {
-    "bg_color": "#800000",  # Maroon background
-    "text_color": "#FFFFFF",  # White text color
-    "button_color": "#FFD700",  # Gold button background for visibility
-    "button_text_color": "#800000",  # Maroon button text color
-    "button_font": ("Arial", 12, "bold"),
-}
-
-# Main Window
 root = tk.Tk()
-root.title("Library System")
-root.geometry("800x600")
+root.geometry("500x400")
+root.title("Home")
 
-# Header Frame
-header = tk.Frame(root, bg=style["bg_color"], height=100)
-header.pack(fill="x")
 
-# Load and resize logo image
-try:
-    logo_image = Image.open(
-        r"Images\pngkey.com-phillies-logo-png-528919.png"
-    )  # Replace with your logo image path
-    logo_image = logo_image.resize((90, 90), Image.LANCZOS)
-    logo_photo = ImageTk.PhotoImage(logo_image)
-    logo_label = tk.Label(header, image=logo_photo, bg=style["bg_color"])
-    logo_label.image = logo_photo
-    logo_label.place(x=10, y=5)
+def hide_indicators():
+    home_indicate.config(bg="#F0F0F0")
+    mybooks_indicate.config(bg="#F0F0F0")
+    leaderboards_indicate.config(bg="#F0F0F0")
+    profile_indicate.config(bg="#F0F0F0")
 
-    # Adding a symmetric icon on the other end
-    right_logo_label = tk.Label(header, image=logo_photo, bg=style["bg_color"])
-    right_logo_label.image = logo_photo
-    right_logo_label.place(
-        x=1535 - 90 - 10, y=5
-    )  # Corrected to 800 - icon_width - padding
-except FileNotFoundError:
-    print("Error: Logo image not found. Please check the file path.")
 
-# Adding text to the header
-university_label = tk.Label(
-    header,
-    text="Polytechnic University of the Philippines",
-    fg=style["text_color"],
-    bg=style["bg_color"],
-    font=("Arial", 16, "bold"),
+def indicate(lb):
+    hide_indicators()
+    lb.config(bg="#158aff")
+
+
+options_frame = tk.Frame(root, bg="#800000")
+
+# Add logo to the top of options_frame
+top_logo_image = Image.open("Images/pile.png")  # Path to your top logo image
+top_logo_resized_image = top_logo_image.resize((100, 100), Image.LANCZOS)
+top_logo_photo = ImageTk.PhotoImage(top_logo_resized_image)
+
+# Create label for top logo in options_frame
+top_logo_label = tk.Label(options_frame, image=top_logo_photo, bg="#800000")
+top_logo_label.image = top_logo_photo
+top_logo_label.place(x=100, y=110, anchor="center")
+
+# Add logo to the bottom of options_frame
+bottom_logo_image = Image.open("Images/pile.png")  # Path to your bottom logo image
+bottom_logo_resized_image = bottom_logo_image.resize((100, 100), Image.LANCZOS)
+bottom_logo_photo = ImageTk.PhotoImage(bottom_logo_resized_image)
+
+# Create label for bottom logo in options_frame
+bottom_logo_label = tk.Label(options_frame, image=bottom_logo_photo, bg="#800000")
+bottom_logo_label.image = bottom_logo_photo
+bottom_logo_label.place(x=100, y=680, anchor="center")  # Adjusted for window size
+
+home_btn = tk.Button(
+    options_frame,
+    text="Home",
+    font=("Bold", 15),
+    fg="#800000",
+    bd=0,
+    bg="#FFD700",
+    command=lambda: indicate(home_indicate),
 )
-university_label.place(relx=0.5, y=10, anchor="n")
+home_btn.place(x=10, y=300)
 
-library_label = tk.Label(
-    header,
-    text="LIBRARY",
-    fg=style["text_color"],
-    bg=style["bg_color"],
-    font=("Arial", 14, "bold"),
+home_indicate = tk.Label(options_frame, text="", bg="#F0F0F0")
+home_indicate.place(x=3, y=300, width=5, height=40)
+
+mybooks_btn = tk.Button(
+    options_frame,
+    text="MyBooks",
+    font=("Bold", 15),
+    fg="#800000",
+    bd=0,
+    bg="#FFD700",
+    command=lambda: indicate(mybooks_indicate),
 )
-library_label.place(relx=0.5, y=40, anchor="n")
+mybooks_btn.place(x=10, y=350)
 
-# Buttons Frame below header
-button_frame = tk.Frame(root, bg=style["bg_color"], height=50)
-button_frame.pack(fill="x")
+mybooks_indicate = tk.Label(options_frame, text="", bg="#F0F0F0")
+mybooks_indicate.place(x=3, y=350, width=5, height=40)
 
-# Load icon images
-try:
-    home_icon = Image.open(r"Images\home.png")
-    home_icon = home_icon.resize((30, 30), Image.LANCZOS)  # Adjust size as needed
-    home_icon_photo = ImageTk.PhotoImage(home_icon)
+leaderboards_btn = tk.Button(
+    options_frame,
+    text="Readerboards",
+    font=("Bold", 15),
+    fg="#800000",
+    bd=0,
+    bg="#FFD700",
+    command=lambda: indicate(leaderboards_indicate),
+)
+leaderboards_btn.place(x=10, y=400)
 
-    my_books_icon = Image.open(r"Images\my books.png")
-    my_books_icon = my_books_icon.resize(
-        (30, 30), Image.LANCZOS
-    )  # Adjust size as needed
-    my_books_icon_photo = ImageTk.PhotoImage(my_books_icon)
+leaderboards_indicate = tk.Label(options_frame, text="", bg="#F0F0F0")
+leaderboards_indicate.place(x=3, y=400, width=5, height=40)
 
-    readerboards_icon = Image.open(r"Images\readerboards.png")
-    readerboards_icon = readerboards_icon.resize(
-        (30, 30), Image.LANCZOS
-    )  # Adjust size as needed
-    readerboards_icon_photo = ImageTk.PhotoImage(readerboards_icon)
+profile_btn = tk.Button(
+    options_frame,
+    text="Profile",
+    font=("Bold", 15),
+    fg="#800000",
+    bd=0,
+    bg="#FFD700",
+    command=lambda: indicate(profile_indicate),
+)
+profile_btn.place(x=10, y=450)
 
-    # Home Button
-    home_button = tk.Button(
-        button_frame,
-        image=home_icon_photo,
-        command=lambda: print("Home button clicked"),
-        bg=style["button_color"],
-        fg=style["button_text_color"],
-        font=style["button_font"],
-    )
-    home_button.image = home_icon_photo  # Keep a reference
-    home_button.pack(side="left", padx=10, pady=5)
+profile_indicate = tk.Label(options_frame, text="", bg="#F0F0F0")
+profile_indicate.place(x=3, y=450, width=5, height=40)
 
-    # My Books Button
-    my_books_button = tk.Button(
-        button_frame,
-        image=my_books_icon_photo,
-        command=lambda: print("My Books button clicked"),
-        bg=style["button_color"],
-        fg=style["button_text_color"],
-        font=style["button_font"],
-    )
-    my_books_button.image = my_books_icon_photo  # Keep a reference
-    my_books_button.pack(side="left", padx=5, pady=5)
+options_frame.pack(side=tk.LEFT, fill=tk.Y)
+options_frame.pack_propagate(False)
+options_frame.configure(width=200, height=400)
 
-    # Readerboards Button
-    readerboards_button = tk.Button(
-        button_frame,
-        image=readerboards_icon_photo,
-        command=lambda: print("Readerboards button clicked"),
-        bg=style["button_color"],
-        fg=style["button_text_color"],
-        font=style["button_font"],
-    )
-    readerboards_button.image = readerboards_icon_photo  # Keep a reference
-    readerboards_button.pack(side="left", padx=5, pady=5)
+main_frame = tk.Frame(root, highlightbackground="black", highlightthickness=2)
 
-except FileNotFoundError:
-    print("Error: Icon image not found. Please check the file paths.")
+# Adjust image size to fit within the window
+original_image = Image.open("Images\\Seading-Quotes-1.jpg")
+resized_image = original_image.resize((1400, 800), Image.LANCZOS)  # Adjust size to fit
+main_frame_photo = ImageTk.PhotoImage(resized_image)
 
-# Load background image
-try:
-    background_image = Image.open(
-        r"Images\output-onlinepngtools.png"
-    )  # Replace with your background image path
-    background_image = background_image.resize(
-        (800, 450), Image.LANCZOS
-    )  # Adjust the height to fit below button_frame
-    background_photo = ImageTk.PhotoImage(background_image)
-    # Content Frame
-    content = tk.Frame(root)
-    content.pack(fill="both", expand=True)
+main_frame_photo_label = tk.Label(main_frame, image=main_frame_photo)
+main_frame_photo_label.image = main_frame_photo
+main_frame_photo_label.pack(pady=0)
 
-    # Background Image Label
-    background_label = tk.Label(content, image=background_photo)
-    background_label.image = background_photo  # Keep a reference
-    background_label.place(x=0, y=0, relwidth=1, relheight=1)
+main_frame.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+main_frame.pack_propagate(False)
 
-    # Overlay Frame
-    overlay = tk.Frame(content, bg="black")
-    overlay.place(x=0, y=0, relwidth=1, relheight=1)
-
-except FileNotFoundError:
-    print("Error: Background image not found. Please check the file path.")
-
-# Run the application
 root.mainloop()
