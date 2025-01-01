@@ -111,7 +111,13 @@ password_entry = tk.Entry(root, show="*", width=30)
 password_entry.place(x=675, y=410)
 
 login_button = tk.Button(
-    root, text="Login", command=login_user, bg="white", fg="maroon", width=10, height=1
+    root,
+    text="Login",
+    command=login_user,
+    bg="#FFD700",
+    fg="maroon",
+    width=10,
+    height=1,
 )
 login_button.place(x=730, y=440)
 

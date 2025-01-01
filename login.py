@@ -90,45 +90,43 @@ library_label = tk.Label(
 )
 library_label.pack()
 
-# Buttons for Login and Register
+# Buttons for Login and Register with adjusted size
 login_student_button = RoundButton(
     root,
     text="LOG IN AS STUDENT",
     command=on_login_student,
     bg="#800000",
     fg="white",
-    font=("Helvetica", 16),
-    padx=35,
-    pady=15,
+    font=("Helvetica", 12),  # Reduced font size
+    width=20,  # Width in characters
+    height=2,  # Height in lines
 )
-login_student_button.place(relx=0.5, rely=0.5, anchor="center")
+login_student_button.place(relx=0.5, y=440, anchor="center")
 
 login_admin_button = RoundButton(
     root,
     text="LOG IN AS ADMIN",
     command=on_login_admin,
-    bg="#800000",
+    bg="#0000FF",
     fg="white",
-    font=("Helvetica", 16),
-    padx=50,
-    pady=15,
+    font=("Helvetica", 12),
+    width=20,
+    height=2,
 )
-login_admin_button.place(relx=0.5, rely=0.6, anchor="center")  # Adjusted for new button
+login_admin_button.place(relx=0.5, y=495, anchor="center")
 
-# New button for Sign Up
+# New button for Sign Up with adjusted size
 sign_up_button = RoundButton(
     root,
     text="SIGN UP YOUR PUP ID",
     command=on_sign_up,
     bg="#008000",
     fg="white",
-    font=("Helvetica", 16),
-    padx=25,
-    pady=15,
+    font=("Helvetica", 12),
+    width=20,
+    height=2,
 )
-sign_up_button.place(
-    relx=0.5, rely=0.7, anchor="center"
-)  # Positioned below the login buttons
+sign_up_button.place(relx=0.5, y=550, anchor="center")
 
 # Start the GUI loop
 root.mainloop()
