@@ -101,13 +101,13 @@ username_label = tk.Label(
 )
 username_label.place(x=730, y=290)
 
-username_entry = tk.Entry(root, width=30)
+username_entry = tk.Entry(root, borderwidth=5, width=30)
 username_entry.place(x=675, y=350)
 
 password_label = tk.Label(root, text="Password", bg="maroon", fg="white", width=10)
 password_label.place(x=730, y=380)
 
-password_entry = tk.Entry(root, show="*", width=30)
+password_entry = tk.Entry(root, borderwidth=5, show="*", width=30)
 password_entry.place(x=675, y=410)
 
 login_button = tk.Button(
